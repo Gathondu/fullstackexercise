@@ -1,24 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+To run the project create a `.env` file with the following
+run `bundle install`
 
-Things you may want to cover:
+```
+DB_URI=<mogodb cloud uri>
+PORT=3001
+```
 
-* Ruby version
+With that in the root folder, run `rails server` and let the server run which will expose our graphql api.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+cd into `frontend` folder and run `yarn install`
+after a successfull installation run `yarn start`
+this serves the front end on `http://localhost:3000/`
