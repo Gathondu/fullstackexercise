@@ -8,8 +8,8 @@
     "node": "v14.20.0"
   },
   "scripts": {
-    "build": "cd frontend && yarn install && yarn build && cd ..",
+    "build": "cd frontend && npm install && npm run build && cd ..",
     "deploy": "cp -a frontend/build/. public/",
-    "postinstall": "yarn build && yarn deploy && echo 'Client built!'"
+    "postinstall": "npm run build && npm run deploy && echo 'Client built!'"
   }
 }
