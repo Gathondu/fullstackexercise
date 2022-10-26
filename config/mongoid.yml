@@ -173,13 +173,10 @@ development:
     # indexes in the background by default. (default: false)
     # background_indexing: false
 
-test:
-  clients:
+production:
+  sessions:
     default:
-      database: secureframe_test
-      hosts:
-        - localhost:27017
+      uri: <%= "#{ENV['DB_URI']}"%>
       options:
-        read:
-          mode: :primary
-        max_pool_size: 1
+        skip_version_check: true
+        safe: true
