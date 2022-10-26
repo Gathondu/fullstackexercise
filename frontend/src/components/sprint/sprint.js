@@ -11,7 +11,7 @@ const Sprint = () => {
   if (loading)
     return (
       <Typography gutterBottom variant="h5" component="div">
-        "Loading Sprints..."
+        "Loading Sprint..."
       </Typography>
     );
   if (error)

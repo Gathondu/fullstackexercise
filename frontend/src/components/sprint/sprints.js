@@ -33,15 +33,16 @@ const Sprints = () => {
       >
         Add Sprint
       </Link>
-      <Grid
-        sx={{ mt: 5 }}
-        container
-        rowSpacing={1}
-        columns={3}
-        columnSpacing={2}
-      >
-        {data.sprints.length > 0 ? (
-          data.sprints.map((sprint) => (
+
+      {data.sprints.length > 0 ? (
+        <Grid
+          sx={{ mt: 5 }}
+          container
+          rowSpacing={1}
+          columns={3}
+          columnSpacing={2}
+        >
+          {data.sprints.map((sprint) => (
             <Grid item key={sprint.id}>
               <Card sx={{ maxWidth: 345 }}>
                 <CardActionArea href={`/sprint/${sprint.id}`}>
@@ -57,11 +58,11 @@ const Sprints = () => {
                 </CardActionArea>
               </Card>
             </Grid>
-          ))
-        ) : (
-          <Typography>No Sprints Yet!!</Typography>
-        )}
-      </Grid>
+          ))}
+        </Grid>
+      ) : (
+        <Typography>No Sprints Yet!!</Typography>
+      )}
     </div>
   );
 };

@@ -10,7 +10,7 @@ const AddSprint = () => {
   const [startDate, setStartDate] = useState(dayjs());
   const [endDate, setEndDate] = useState(dayjs());
 
-  const [createSprint, { data, loading, error }] = useMutation(CREATE_SPRINT);
+  const [createSprint, { loading, error }] = useMutation(CREATE_SPRINT);
   const handleSubmit = (e) => {
     e.preventDefault();
     createSprint({
@@ -33,7 +33,6 @@ const AddSprint = () => {
         `Sprint creation error! ${error.message}`
       </Typography>
     );
-  console.log(data);
 
   return (
     <form onSubmit={handleSubmit}>
