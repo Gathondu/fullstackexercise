@@ -2,7 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import AppRoutes from "./Routes";
 import reportWebVitals from "./reportWebVitals";
-import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
+import {
+  ApolloProvider,
+  ApolloClient,
+  InMemoryCache,
+  HttpLink,
+} from "@apollo/client";
 import { BrowserRouter as Router } from "react-router-dom";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -10,7 +15,9 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const client = new ApolloClient({
-  uri: "http://127.0.0.1:3001/graphql",
+  link: new HttpLink({
+    uri: "http://127.0.0.1:3001/graphql",
+  }),
   cache: new InMemoryCache(),
 });
 

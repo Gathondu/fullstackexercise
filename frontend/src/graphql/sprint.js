@@ -5,6 +5,9 @@ export const GET_SPRINTS = gql`
     sprints {
       id
       name
+      startDate
+      endDate
+      points
     }
   }
 `;
@@ -23,16 +26,19 @@ export const GET_SPRINT = gql`
 `;
 
 export const CREATE_SPRINT = gql`
-  mutation createSprint(
+  mutation CreateSprint(
     $name: String!
     $startDate: String!
     $endDate: String!
   ) {
     createSprint(name: $name, startDate: $startDate, endDate: $endDate) {
-      id
-      name
-      startDate
-      endDate
+      sprint {
+        id
+        name
+        startDate
+        endDate
+      }
+      errors
     }
   }
 `;

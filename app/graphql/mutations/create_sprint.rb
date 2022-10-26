@@ -7,7 +7,6 @@ class Mutations::CreateSprint < Mutations::BaseMutation
   field :errors, [String], null: false
 
   def resolve(name:, start_date:, end_date:)
-    byebug
     sprint = Sprint.create(
       name: name,
       start_date: start_date,

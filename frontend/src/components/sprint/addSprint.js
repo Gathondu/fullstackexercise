@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { CREATE_SPRINT, GET_SPRINTS } from "../../graphql/sprint";
+import { CREATE_SPRINT } from "../../graphql/sprint";
 import { TextField, Typography, Stack, Button } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
@@ -10,9 +10,7 @@ const AddSprint = () => {
   const [startDate, setStartDate] = useState(dayjs());
   const [endDate, setEndDate] = useState(dayjs());
 
-  const [createSprint] = useMutation(CREATE_SPRINT, {
-    refetchQueries: [{ query: GET_SPRINTS }],
-  });
+  const [createSprint, { data, loading, error }] = useMutation(CREATE_SPRINT);
   const handleSubmit = (e) => {
     e.preventDefault();
     createSprint({
@@ -23,6 +21,19 @@ const AddSprint = () => {
       },
     });
   };
+  if (loading)
+    return (
+      <Typography gutterBottom variant="h5" component="div">
+        "Creating Sprints..."
+      </Typography>
+    );
+  if (error)
+    return (
+      <Typography variant="body2" color="text.secondary">
+        `Sprint creation error! ${error.message}`
+      </Typography>
+    );
+  console.log(data);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -35,7 +46,7 @@ const AddSprint = () => {
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <Stack spacing={2} sx={{ my: 3 }}>
+      <Stack spacing={2} sx={{ my: 3, width: "50%" }}>
         <DatePicker
           required
           label="Start Date"
