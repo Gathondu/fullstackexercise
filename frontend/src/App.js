@@ -5,7 +5,7 @@ import Header from "./components";
 const App = ({ children }) => {
   return (
     <Container className="App">
-      <Header title="SecureFrame" />
+      <Header title="FullStack Exercise" />
       {children}
     </Container>
   );
