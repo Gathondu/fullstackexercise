@@ -1,0 +1,17 @@
+{
+  "name": "fullstackexercise",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Gathondu/fullstackexercise.git",
+  "author": "Denis Ngugi Gathondu <denis.gathondu@yahoo.com>",
+  "license": "MIT",
+  "engines": {
+    "node": "v14.20.0",
+    "yarn": "1.22.18"
+  },
+  "scripts": {
+    "build": "yarn --cwd frontend install && yarn --cwd frontend build",
+    "deploy": "cp -a frontend/build/. public/",
+    "heroku-postbuild": "yarn build && yarn deploy"
+  }
+}
