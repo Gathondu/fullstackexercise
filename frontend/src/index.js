@@ -16,7 +16,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const client = new ApolloClient({
   link: new HttpLink({
-    uri: "http://127.0.0.1:3001/graphql",
+    uri: "https://fullstackexercise.herokuapp.com/graphql",
   }),
   cache: new InMemoryCache(),
 });
