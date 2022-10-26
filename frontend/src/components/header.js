@@ -15,11 +15,11 @@ export default function Header({ title }) {
 
   const menuItems = [
     {
-      title: "Sprints",
+      title: "All Sprints",
       link: "/sprints",
     },
     {
-      title: "Tickets",
+      title: "All Tickets",
       link: "/tickets",
     },
   ];
