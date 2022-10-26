@@ -4,6 +4,9 @@
   "main": "index.js",
   "author": "Denis Ngugi Gathondu <denis.gathondu@yahoo.com>",
   "license": "MIT",
+  "engines": {
+    "node": "v14.20.0"
+  },
   "scripts": {
     "build": "cd frontend && yarn install && yarn build && cd ..",
     "deploy": "cp -a frontend/build/. public/",
