@@ -19,7 +19,10 @@ export const GET_SPRINT = gql`
       name
       startDate
       endDate
-      tickets
+      tickets {
+        id
+        name
+      }
       points
     }
   }
