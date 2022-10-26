@@ -20,6 +20,10 @@ require 'sprockets/railtie'
 Bundler.require(*Rails.groups)
 Dotenv::Railtie.load
 
+require 'mongoid'
+
+Mongoid.load!(File.expand_path('mongoid.yml', './config'))
+
 module Secureframe
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
