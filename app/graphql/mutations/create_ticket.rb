@@ -1,7 +1,7 @@
 class Mutations::CreateTicket < Mutations::BaseMutation
-  argument name: String, required: true
-  argument description: String, required: false
-  argument points: Int, required: true
+  argument :name, String, required: true
+  argument :description, String, required: false
+  argument :points, Int, required: true
 
   field :ticket, Types::TicketType, null: false
   field :errors, [String], null: false
@@ -10,7 +10,7 @@ class Mutations::CreateTicket < Mutations::BaseMutation
     ticket = Ticket.create(
       name: name,
       points: points,
-      desciption: description
+      description: description
     )
 
     if ticket.save
