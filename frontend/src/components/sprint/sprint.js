@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { GET_SPRINT } from "../../graphql/sprint";
 import { useQuery } from "@apollo/client";
-import { Typography } from "@mui/material";
+import { Typography, Button } from "@mui/material";
 
 const Sprint = () => {
   const { sprintId: id } = useParams();
@@ -34,6 +34,9 @@ const Sprint = () => {
       <Typography gutterBottom variant="h5" component="div">
         Tickets: {tickets.length > 0 ? tickets.length : "None"}
       </Typography>
+      {tickets.length > 0 && (
+        <Button href={`/sprint/${id}/tickets`}>View Tickets in Sprint</Button>
+      )}
     </div>
   );
 };

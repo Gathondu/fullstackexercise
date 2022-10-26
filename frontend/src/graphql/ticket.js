@@ -23,8 +23,18 @@ export const GET_TICKET = gql`
 `;
 
 export const CREATE_TICKET = gql`
-  mutation CreateTicket($name: String!, $description: String!, $points: Int!) {
-    createTicket(name: $name, description: $description, points: $points) {
+  mutation CreateTicket(
+    $name: String!
+    $description: String!
+    $points: Int!
+    $sprintId: String!
+  ) {
+    createTicket(
+      name: $name
+      description: $description
+      points: $points
+      sprintId: $sprintId
+    ) {
       ticket {
         id
         name
