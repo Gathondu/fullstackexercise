@@ -1,15 +1,12 @@
 import React from "react";
 import { Container } from "@mui/material";
 import Header from "./components";
-import AppRoutes from "./Routes";
 
-const App = () => {
+const App = ({ children }) => {
   return (
     <Container className="App">
       <Header title="SecureFrame" />
-      <div>
-        <AppRoutes />
-      </div>
+      {children}
     </Container>
   );
 };

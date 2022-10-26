@@ -4,10 +4,10 @@ import { useQuery } from "@apollo/client";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { Button, CardActionArea } from "@mui/material";
+import { CardActionArea, Link } from "@mui/material";
 
 const Sprints = () => {
-  const [data, loading, error] = useQuery(GET_SPRINTS);
+  const { data, loading, error } = useQuery(GET_SPRINTS);
 
   if (loading)
     return (
@@ -25,21 +25,27 @@ const Sprints = () => {
 
   return (
     <div>
-      <Button>Add Sprint</Button>
-      {data.sprints.map((sprint) => (
-        <Card sx={{ maxWidth: 345 }}>
-          <CardActionArea>
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                {sprint.name}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {sprint.startDate - sprint.endDate}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-      ))}
+      <Link variant="button" underline="hover" href="/sprints/add">
+        Add Sprint
+      </Link>
+      {data.sprints.length > 0 ? (
+        data.sprints.map((sprint) => (
+          <Card sx={{ maxWidth: 345 }}>
+            <CardActionArea>
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  {sprint.name}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {sprint.startDate - sprint.endDate}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        ))
+      ) : (
+        <Typography>No Sprints Yet!!</Typography>
+      )}
     </div>
   );
 };

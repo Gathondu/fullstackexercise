@@ -1,12 +1,18 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
-import Sprints from "./components/sprint";
+import { Navigate, Routes, Route } from "react-router-dom";
+import Sprints from "./components/sprint/sprints";
+import AddSprint from "./components/sprint/addSprint";
+import Layout from "./App";
 
 const AppRoutes = () => {
   return (
-    <Routes>
-      <Route path="/sprints" element={Sprints} />
-    </Routes>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Navigate to="/sprints" />} />
+        <Route path="/sprints" element={<Sprints />} />
+        <Route path="/sprints/add" element={<AddSprint />} />
+      </Routes>
+    </Layout>
   );
 };
 

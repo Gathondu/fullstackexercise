@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const GET_SPRINTS = gql`
-  query {
+  query sprints {
     sprints {
       id
       name
@@ -23,7 +23,11 @@ export const GET_SPRINT = gql`
 `;
 
 export const CREATE_SPRINT = gql`
-  mutation createSprint($name: String!, $startDate: Date!, $endDate: Date!) {
+  mutation createSprint(
+    $name: String!
+    $startDate: String!
+    $endDate: String!
+  ) {
     createSprint(name: $name, startDate: $startDate, endDate: $endDate) {
       id
       name
