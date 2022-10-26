@@ -3,6 +3,6 @@ class Ticket
   include Mongoid::Timestamps
   field :name, type: String
   field :description, type: String
-  field :points, type: Interger
+  field :points, type: Integer
   belongs_to :sprint
 end

@@ -4,7 +4,7 @@ class Sprint
   field :name, type: String
   field :start_date, type: Time
   field :end_date, type: Time
-  field :points, type: Interger
+  field :points, type: Integer
 
-  has_many :tickets
+  has_many :tickets, dependent: :destroy
 end

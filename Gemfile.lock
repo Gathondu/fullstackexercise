@@ -170,6 +170,7 @@ DEPENDENCIES
   mongoid
   puma (~> 5.0)
   rails (~> 6.1.4, >= 6.1.4.4)
+  sprockets
   tzinfo-data
 
 RUBY VERSION
