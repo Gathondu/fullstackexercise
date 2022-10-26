@@ -1,0 +1,12 @@
+{
+  "name": "fullstackexcercise",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Denis Ngugi Gathondu <denis.gathondu@yahoo.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "cd frontend && yarn install && yarn build && cd ..",
+    "deploy": "cp -a frontend/build/. public/",
+    "postinstall": "yarn build && yarn deploy && echo 'Client built!'"
+  }
+}
