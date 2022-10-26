@@ -174,7 +174,7 @@ development:
     # background_indexing: false
 
 production:
-  sessions:
+  clients:
     default:
       uri: <%= "#{ENV['DB_URI']}"%>
       options:
