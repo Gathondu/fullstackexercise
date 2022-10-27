@@ -28,12 +28,14 @@ export const CREATE_TICKET = gql`
     $description: String!
     $points: Int!
     $sprintId: String!
+    $ticketId: String
   ) {
     createTicket(
       name: $name
       description: $description
       points: $points
       sprintId: $sprintId
+      ticketId: $ticketId
     ) {
       ticket {
         id

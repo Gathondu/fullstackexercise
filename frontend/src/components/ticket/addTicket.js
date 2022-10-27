@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 import { CREATE_TICKET } from "../../graphql/ticket";
 import { GET_SPRINTS } from "../../graphql/sprint";
@@ -13,10 +14,11 @@ import {
   MenuItem,
 } from "@mui/material";
 
-const AddTicket = () => {
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [points, setPoints] = useState(0);
+const AddTicket = ({ ticket, isEditing }) => {
+  const [name, setName] = useState(ticket.name || "");
+  const [description, setDescription] = useState(ticket.description || "");
+  const [points, setPoints] = useState(ticket.points || 0);
+  const { ticketId } = useParams();
 
   const [createTicket, { loading, error }] = useMutation(CREATE_TICKET);
 
@@ -45,6 +47,7 @@ const AddTicket = () => {
         description,
         points,
         sprintId: selected,
+        ticketId,
       },
     });
   };
@@ -86,6 +89,7 @@ const AddTicket = () => {
         <TextField
           type="number"
           label="Points"
+          defaultValue={points}
           inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
           onChange={(e) => setPoints(parseInt(e.target.value))}
         />
@@ -109,7 +113,7 @@ const AddTicket = () => {
         </FormControl>
       </FormGroup>
       <Button type="submit" variant="contained" color="primary">
-        Submit
+        {isEditing ? "Edit" : "Submit"}
       </Button>
     </form>
   );
