@@ -45,10 +45,14 @@ const Ticket = () => {
         </Typography>
       </div>
       <Button onClick={() => setIsEditing(true)}>Edit</Button>
-      <Button onClick={() => setViewSprint(!viewSprint)}>
-        {viewSprint ? "Hide Sprint" : "View Sprint"}
-      </Button>
-      {viewSprint && <TicketSprint sprint={data.ticket.sprint} />}
+      {data.ticket.sprint && (
+        <>
+          <Button onClick={() => setViewSprint(!viewSprint)}>
+            {viewSprint ? "Hide Sprint" : "View Sprint"}
+          </Button>
+          {viewSprint && <TicketSprint sprint={data.ticket.sprint} />}
+        </>
+      )}
     </>
   );
 };
