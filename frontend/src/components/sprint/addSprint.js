@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
+import { useNavigate } from "react-router-dom";
 import { CREATE_SPRINT } from "../../graphql/sprint";
 import { TextField, Typography, Stack, Button } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 
-const AddSprint = () => {
-  const [name, setName] = useState("");
-  const [startDate, setStartDate] = useState(dayjs());
-  const [endDate, setEndDate] = useState(dayjs());
+const AddSprint = ({ sprint = {}, isEditing = false }) => {
+  const [name, setName] = useState(sprint.name || "");
+  const [startDate, setStartDate] = useState(sprint.startDate || dayjs());
+  const [endDate, setEndDate] = useState(sprint.endDate || dayjs());
+  const navigate = useNavigate();
 
-  const [createSprint, { loading, error }] = useMutation(CREATE_SPRINT);
+  const [createSprint, { loading, error }] = useMutation(CREATE_SPRINT, {
+    onCompleted: () => navigate("/sprints"),
+  });
   const handleSubmit = (e) => {
     e.preventDefault();
     createSprint({
@@ -18,6 +22,7 @@ const AddSprint = () => {
         name,
         startDate,
         endDate,
+        id: sprint.id,
       },
     });
   };
@@ -36,7 +41,9 @@ const AddSprint = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Typography sx={{ m: 3 }}>New Sprint</Typography>
+      <Typography sx={{ m: 3 }}>
+        {isEditing ? "Edit Sprint" : "New Sprint"}
+      </Typography>
       <TextField
         id="standard-basic"
         required
@@ -62,7 +69,7 @@ const AddSprint = () => {
         />
       </Stack>
       <Button type="submit" variant="contained" color="primary">
-        Submit
+        {isEditing ? "Edit" : "Submit"}
       </Button>
     </form>
   );

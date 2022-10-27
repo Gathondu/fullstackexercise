@@ -22,6 +22,8 @@ export const GET_SPRINT = gql`
       tickets {
         id
         name
+        description
+        points
       }
       points
     }
@@ -33,8 +35,14 @@ export const CREATE_SPRINT = gql`
     $name: String!
     $startDate: String!
     $endDate: String!
+    $id: String
   ) {
-    createSprint(name: $name, startDate: $startDate, endDate: $endDate) {
+    createSprint(
+      name: $name
+      startDate: $startDate
+      endDate: $endDate
+      id: $id
+    ) {
       sprint {
         id
         name
