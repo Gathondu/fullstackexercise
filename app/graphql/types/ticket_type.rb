@@ -6,7 +6,7 @@ module Types
     field :name, String, null: false
     field :description, String, null: true
     field :points, Integer, null: false
-    field :sprint, Types::SprintType, null: false
+    field :sprint, Types::SprintType, null: true
 
     def sprint
       object.sprint

@@ -38,7 +38,7 @@ const AddTicket = ({
     error: sprintsError,
   } = useQuery(GET_SPRINTS);
   const [sprints, setSprints] = useState([]);
-  const [selected, setSelected] = useState(ticket.sprint.id || "");
+  const [selected, setSelected] = useState(ticket?.sprint?.id || "");
 
   useEffect(() => {
     if (!sprintsLoading && !sprintsError) {
@@ -113,6 +113,7 @@ const AddTicket = ({
             <Select
               value={selected}
               onChange={(e) => setSelected(e.target.value)}
+              required
               inputProps={{
                 name: "sprint",
               }}

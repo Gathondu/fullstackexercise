@@ -17,7 +17,7 @@ class Mutations::CreateSprint < Mutations::BaseMutation
     if sprint.update(params) || sprint.save
       { sprint: sprint, errors: [] }
     else
-      { sprint: nil, errors: sprint.errors.full_messages }
+      { sprint: sprint, errors: sprint.errors.full_messages }
     end
   end
 end
