@@ -30,6 +30,7 @@ const AddTicket = ({
       isEditing ? navigate(`/ticket/${ticketId}`) : navigate("/tickets");
       setIsEditing(false);
     },
+    refetchQueries: ["tickets"],
   });
 
   const {

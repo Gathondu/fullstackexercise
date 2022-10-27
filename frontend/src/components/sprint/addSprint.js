@@ -22,6 +22,7 @@ const AddSprint = ({
       isEditing ? navigate(`/sprint/${sprintId}`) : navigate("/sprints");
       setIsEditing(false);
     },
+    refetchQueries: ["sprints"],
   });
   const handleSubmit = (e) => {
     e.preventDefault();
