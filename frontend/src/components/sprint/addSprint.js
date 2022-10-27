@@ -48,38 +48,43 @@ const AddSprint = ({
     );
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Typography sx={{ m: 3 }}>
-        {isEditing ? "Edit Sprint" : "New Sprint"}
-      </Typography>
-      <TextField
-        id="standard-basic"
-        required
-        label="Name"
-        variant="standard"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <Stack spacing={2} sx={{ my: 3, width: "50%" }}>
-        <DatePicker
+    <>
+      {!isEditing && (
+        <Button onClick={() => navigate("/sprints")}>Back to Sprints</Button>
+      )}
+      <form onSubmit={handleSubmit}>
+        <Typography sx={{ m: 3 }}>
+          {isEditing ? "Edit Sprint" : "New Sprint"}
+        </Typography>
+        <TextField
+          id="standard-basic"
           required
-          label="Start Date"
-          value={startDate}
-          onChange={(newValue) => setStartDate(dayjs(newValue))}
-          renderInput={(params) => <TextField {...params} />}
+          label="Name"
+          variant="standard"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
-        <DatePicker
-          required
-          label="End Date"
-          value={endDate}
-          onChange={(newValue) => setEndDate(dayjs(newValue))}
-          renderInput={(params) => <TextField {...params} />}
-        />
-      </Stack>
-      <Button type="submit" variant="contained" color="primary">
-        {isEditing ? "Edit" : "Submit"}
-      </Button>
-    </form>
+        <Stack spacing={2} sx={{ my: 3, width: "50%" }}>
+          <DatePicker
+            required
+            label="Start Date"
+            value={startDate}
+            onChange={(newValue) => setStartDate(dayjs(newValue))}
+            renderInput={(params) => <TextField {...params} />}
+          />
+          <DatePicker
+            required
+            label="End Date"
+            value={endDate}
+            onChange={(newValue) => setEndDate(dayjs(newValue))}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </Stack>
+        <Button type="submit" variant="contained" color="primary">
+          {isEditing ? "Edit" : "Submit"}
+        </Button>
+      </form>
+    </>
   );
 };
 

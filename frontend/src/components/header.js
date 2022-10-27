@@ -9,9 +9,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Menu from "@mui/material/Menu";
 import Link from "@mui/material/Link";
 import MenuItem from "@mui/material/MenuItem";
+import { useNavigate } from "react-router-dom";
 
 export default function Header({ title }) {
   const [anchorEl, setAnchorEl] = useState(null);
+  const navigate = useNavigate();
 
   const menuItems = [
     {
@@ -45,22 +47,28 @@ export default function Header({ title }) {
             onClick={handleClick}
           >
             <MenuIcon />
-            <Menu
-              id="simple-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              {menuItems.map((item) => (
-                <MenuItem key={item.title}>
-                  <Link href={item.link} variant="h6" underline="hover">
-                    {item.title}
-                  </Link>
-                </MenuItem>
-              ))}
-            </Menu>
           </IconButton>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClick={handleClose}
+            onClose={handleClose}
+            onBlur={handleClose}
+          >
+            {menuItems.map((item) => (
+              <MenuItem key={item.title}>
+                <Link
+                  onClick={() => navigate(item.link)}
+                  variant="h6"
+                  underline="hover"
+                >
+                  {item.title}
+                </Link>
+              </MenuItem>
+            ))}
+          </Menu>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {title}
           </Typography>

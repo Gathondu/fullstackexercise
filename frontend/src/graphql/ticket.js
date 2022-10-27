@@ -7,6 +7,10 @@ export const GET_TICKETS = gql`
       name
       description
       points
+      sprint {
+        id
+        name
+      }
     }
   }
 `;
@@ -18,6 +22,13 @@ export const GET_TICKET = gql`
       name
       description
       points
+      sprint {
+        id
+        name
+        startDate
+        endDate
+        points
+      }
     }
   }
 `;

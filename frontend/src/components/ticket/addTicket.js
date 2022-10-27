@@ -69,58 +69,63 @@ const AddTicket = ({ ticket = {}, isEditing = false }) => {
     );
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Typography sx={{ m: 3 }}>
-        {isEditing ? "Edit Ticket" : "New Ticket"}
-      </Typography>
-      <FormGroup sx={{ mb: 3, width: "50%" }}>
-        <TextField
-          id="standard-basic"
-          required
-          label="Name"
-          variant="standard"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <TextField
-          id="standard-multiline-static"
-          label="Description"
-          multiline
-          rows={4}
-          defaultValue={description}
-          variant="standard"
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <TextField
-          type="number"
-          label="Points"
-          defaultValue={points}
-          inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-          onChange={(e) => setPoints(parseInt(e.target.value))}
-        />
-        <FormControl sx={{ mt: 4 }}>
-          <InputLabel htmlFor="agent-simple">Sprint</InputLabel>
-          <Select
-            value={selected}
-            onChange={(e) => setSelected(e.target.value)}
-            inputProps={{
-              name: "sprint",
-            }}
-          >
-            {sprints.map((sprint) => {
-              return (
-                <MenuItem key={sprint.value} value={sprint.value}>
-                  {sprint.name}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </FormControl>
-      </FormGroup>
-      <Button type="submit" variant="contained" color="primary">
-        {isEditing ? "Edit" : "Submit"}
-      </Button>
-    </form>
+    <>
+      {!isEditing && (
+        <Button onClick={() => navigate("/tickets")}>back to tickets</Button>
+      )}
+      <form onSubmit={handleSubmit}>
+        <Typography sx={{ m: 3 }}>
+          {isEditing ? "Edit Ticket" : "New Ticket"}
+        </Typography>
+        <FormGroup sx={{ mb: 3, width: "50%" }}>
+          <TextField
+            id="standard-basic"
+            required
+            label="Name"
+            variant="standard"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <TextField
+            id="standard-multiline-static"
+            label="Description"
+            multiline
+            rows={4}
+            defaultValue={description}
+            variant="standard"
+            onChange={(e) => setDescription(e.target.value)}
+          />
+          <TextField
+            type="number"
+            label="Points"
+            defaultValue={points}
+            inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+            onChange={(e) => setPoints(parseInt(e.target.value))}
+          />
+          <FormControl sx={{ mt: 4 }}>
+            <InputLabel htmlFor="agent-simple">Sprint</InputLabel>
+            <Select
+              value={selected}
+              onChange={(e) => setSelected(e.target.value)}
+              inputProps={{
+                name: "sprint",
+              }}
+            >
+              {sprints.map((sprint) => {
+                return (
+                  <MenuItem key={sprint.value} value={sprint.value}>
+                    {sprint.name}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+        </FormGroup>
+        <Button type="submit" variant="contained" color="primary">
+          {isEditing ? "Edit" : "Submit"}
+        </Button>
+      </form>
+    </>
   );
 };
 

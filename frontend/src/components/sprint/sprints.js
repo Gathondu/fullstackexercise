@@ -6,9 +6,11 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { CardActionArea, Link, Grid } from "@mui/material";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
 const Sprints = () => {
   const { data, loading, error } = useQuery(GET_SPRINTS);
+  const navigate = useNavigate();
 
   if (loading)
     return (
@@ -29,7 +31,7 @@ const Sprints = () => {
         sx={{ marginTop: "3px" }}
         variant="button"
         underline="hover"
-        href="/sprints/add"
+        onClick={() => navigate("/sprints/add")}
       >
         Add Sprint
       </Link>
@@ -45,7 +47,9 @@ const Sprints = () => {
           {data.sprints.map((sprint) => (
             <Grid item key={sprint.id}>
               <Card sx={{ maxWidth: 345 }}>
-                <CardActionArea href={`/sprint/${sprint.id}`}>
+                <CardActionArea
+                  onClick={() => navigate(`/sprint/${sprint.id}`)}
+                >
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
                       {sprint.name}

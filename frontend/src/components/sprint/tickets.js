@@ -3,14 +3,16 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { CardActionArea, Grid } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const SprintTickets = ({ tickets }) => {
+  const navigate = useNavigate();
   return (
     <Grid sx={{ mt: 5 }} container rowSpacing={1} columns={3} columnSpacing={2}>
       {tickets.map((ticket) => (
         <Grid item key={ticket.id}>
           <Card sx={{ maxWidth: 345 }}>
-            <CardActionArea href={`/ticket/${ticket.id}`}>
+            <CardActionArea onclick={() => navigate(`/ticket/${ticket.id}`)}>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
                   {ticket.name}

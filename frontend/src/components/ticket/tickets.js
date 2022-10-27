@@ -5,9 +5,11 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { CardActionArea, Link, Grid } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Tickets = () => {
   const { data, loading, error } = useQuery(GET_TICKETS);
+  const navigate = useNavigate();
 
   if (loading)
     return (
@@ -28,7 +30,7 @@ const Tickets = () => {
         sx={{ marginTop: "3px" }}
         variant="button"
         underline="hover"
-        href="/tickets/add"
+        onClick={() => navigate("/tickets/add")}
       >
         Add Ticket
       </Link>
@@ -44,7 +46,9 @@ const Tickets = () => {
           {data.tickets.map((ticket) => (
             <Grid item key={ticket.id}>
               <Card sx={{ maxWidth: 345 }}>
-                <CardActionArea href={`/ticket/${ticket.id}`}>
+                <CardActionArea
+                  onClick={() => navigate(`/ticket/${ticket.id}`)}
+                >
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
                       {ticket.name}

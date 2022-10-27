@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { GET_TICKET } from "../../graphql/ticket";
 import { useQuery } from "@apollo/client";
 import { Typography, Button } from "@mui/material";
 import AddTicket from "./addTicket";
+import TicketSprint from "./sprint";
 
 const Ticket = () => {
   const { ticketId: id } = useParams();
   const { data, loading, error } = useQuery(GET_TICKET, { variables: { id } });
   const [isEditing, setIsEditing] = useState(false);
+  const [viewSprint, setViewSprint] = useState(false);
+  const navigate = useNavigate();
 
   if (loading)
     return (
@@ -29,6 +32,7 @@ const Ticket = () => {
     <AddTicket ticket={data.ticket} isEditing />
   ) : (
     <>
+      <Button onClick={() => navigate("/tickets")}>back to tickets</Button>
       <div>
         <Typography gutterBottom variant="h5" component="div">
           Name: {name}
@@ -41,6 +45,10 @@ const Ticket = () => {
         </Typography>
       </div>
       <Button onClick={() => setIsEditing(true)}>Edit</Button>
+      <Button onClick={() => setViewSprint(!viewSprint)}>
+        {viewSprint ? "Hide Sprint" : "View Sprint"}
+      </Button>
+      {viewSprint && <TicketSprint sprint={data.ticket.sprint} />}
     </>
   );
 };

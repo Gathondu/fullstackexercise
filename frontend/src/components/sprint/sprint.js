@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { GET_SPRINT } from "../../graphql/sprint";
 import { useQuery } from "@apollo/client";
 import { Typography, Button } from "@mui/material";
@@ -11,6 +11,7 @@ const Sprint = () => {
   const { data, loading, error } = useQuery(GET_SPRINT, { variables: { id } });
   const [viewTickets, setViewTickets] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const navigate = useNavigate();
 
   if (loading)
     return (
@@ -29,6 +30,7 @@ const Sprint = () => {
 
   return (
     <div>
+      <Button onClick={() => navigate("/sprints")}>Back to Sprints</Button>
       {isEditing ? (
         <AddSprint sprint={data.sprint} isEditing setIsEditing={setIsEditing} />
       ) : (
