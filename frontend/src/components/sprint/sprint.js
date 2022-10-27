@@ -30,7 +30,7 @@ const Sprint = () => {
   return (
     <div>
       {isEditing ? (
-        <AddSprint sprint={data.sprint} isEditing />
+        <AddSprint sprint={data.sprint} isEditing setIsEditing={setIsEditing} />
       ) : (
         <>
           <Typography gutterBottom variant="h5" component="div">
