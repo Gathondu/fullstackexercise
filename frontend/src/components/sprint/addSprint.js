@@ -49,7 +49,7 @@ const AddSprint = ({
 
   return (
     <>
-      {!isEditing && (
+      {isEditing && (
         <Button onClick={() => navigate("/sprints")}>Back to Sprints</Button>
       )}
       <form onSubmit={handleSubmit}>

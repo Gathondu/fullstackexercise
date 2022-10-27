@@ -12,7 +12,7 @@ const SprintTickets = ({ tickets }) => {
       {tickets.map((ticket) => (
         <Grid item key={ticket.id}>
           <Card sx={{ maxWidth: 345 }}>
-            <CardActionArea onclick={() => navigate(`/ticket/${ticket.id}`)}>
+            <CardActionArea onClick={() => navigate(`/ticket/${ticket.id}`)}>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
                   {ticket.name}

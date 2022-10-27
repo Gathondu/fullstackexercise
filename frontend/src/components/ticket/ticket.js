@@ -16,7 +16,7 @@ const Ticket = () => {
   if (loading)
     return (
       <Typography gutterBottom variant="h5" component="div">
-        "Loading Ticket..."
+        "Loading..."
       </Typography>
     );
   if (error)
@@ -29,7 +29,7 @@ const Ticket = () => {
   const { name, points, description } = data.ticket;
 
   return isEditing ? (
-    <AddTicket ticket={data.ticket} isEditing />
+    <AddTicket ticket={data.ticket} isEditing setIsEditing={setIsEditing} />
   ) : (
     <>
       <Button onClick={() => navigate("/tickets")}>back to tickets</Button>

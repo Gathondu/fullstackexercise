@@ -13,7 +13,6 @@ class Mutations::CreateSprint < Mutations::BaseMutation
                end_date: end_date,
                points: 0 }
     sprint = id ? Sprint.find(id) : Sprint.create(params)
-    sprint.points = sprint.tickets.map.sum(&:points)
 
     if sprint.update(params) || sprint.save
       { sprint: sprint, errors: [] }

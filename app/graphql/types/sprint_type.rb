@@ -12,5 +12,9 @@ module Types
     def tickets
       object.tickets
     end
+
+    def points
+      object.tickets.map.sum(&:points)
+    end
   end
 end

@@ -14,7 +14,11 @@ import {
   MenuItem,
 } from "@mui/material";
 
-const AddTicket = ({ ticket = {}, isEditing = false }) => {
+const AddTicket = ({
+  ticket = {},
+  isEditing = false,
+  setIsEditing = () => {},
+}) => {
   const [name, setName] = useState(ticket.name || "");
   const [description, setDescription] = useState(ticket.description || "");
   const [points, setPoints] = useState(ticket.points || 0);
@@ -22,7 +26,10 @@ const AddTicket = ({ ticket = {}, isEditing = false }) => {
   const navigate = useNavigate();
 
   const [createTicket, { loading, error }] = useMutation(CREATE_TICKET, {
-    onCompleted: () => navigate("/tickets"),
+    onCompleted: () => {
+      isEditing ? navigate(`/ticket/${ticketId}`) : navigate("/tickets");
+      setIsEditing(false);
+    },
   });
 
   const {
@@ -31,14 +38,13 @@ const AddTicket = ({ ticket = {}, isEditing = false }) => {
     error: sprintsError,
   } = useQuery(GET_SPRINTS);
   const [sprints, setSprints] = useState([]);
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState(ticket.sprint.id || "");
 
   useEffect(() => {
     if (!sprintsLoading && !sprintsError) {
       setSprints(
         data.sprints.map((sprint) => ({ name: sprint.name, value: sprint.id }))
       );
-      setSelected(data.sprints[0].id);
     }
   }, [data, sprintsLoading, sprintsError]);
 
@@ -58,19 +64,19 @@ const AddTicket = ({ ticket = {}, isEditing = false }) => {
   if (loading)
     return (
       <Typography gutterBottom variant="h5" component="div">
-        "Creating Ticket..."
+        "Loading..."
       </Typography>
     );
   if (error)
     return (
       <Typography variant="body2" color="text.secondary">
-        `Ticket creation error! ${error.message}`
+        `Ticket Error! ${error.message}`
       </Typography>
     );
 
   return (
     <>
-      {!isEditing && (
+      {isEditing && (
         <Button onClick={() => navigate("/tickets")}>back to tickets</Button>
       )}
       <form onSubmit={handleSubmit}>

@@ -5,6 +5,7 @@ import { useQuery } from "@apollo/client";
 import { Typography, Button } from "@mui/material";
 import SprintTickets from "./tickets";
 import AddSprint from "./addSprint";
+import dayjs from "dayjs";
 
 const Sprint = () => {
   const { sprintId: id } = useParams();
@@ -26,15 +27,15 @@ const Sprint = () => {
       </Typography>
     );
 
-  const { name, points, tickets } = data.sprint;
+  const { name, points, tickets, startDate, endDate } = data.sprint;
 
   return (
     <div>
-      <Button onClick={() => navigate("/sprints")}>Back to Sprints</Button>
       {isEditing ? (
         <AddSprint sprint={data.sprint} isEditing setIsEditing={setIsEditing} />
       ) : (
         <>
+          <Button onClick={() => navigate("/sprints")}>Back to Sprints</Button>
           <Typography gutterBottom variant="h5" component="div">
             Name: {name}
           </Typography>
@@ -43,6 +44,10 @@ const Sprint = () => {
           </Typography>
           <Typography gutterBottom variant="h5" component="div">
             Tickets: {tickets.length > 0 ? tickets.length : "None"}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {dayjs(startDate).format("dddd, MMMM D YYYY")} -{" "}
+            {dayjs(endDate).format("dddd, MMMM D YYYY")}
           </Typography>
         </>
       )}
