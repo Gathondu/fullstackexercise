@@ -50,9 +50,7 @@ const AddSprint = ({
 
   return (
     <>
-      {isEditing && (
-        <Button onClick={() => navigate("/sprints")}>Back to Sprints</Button>
-      )}
+      <Button onClick={() => navigate("/sprints")}>Back to Sprints</Button>
       <form onSubmit={handleSubmit}>
         <Typography sx={{ m: 3 }}>
           {isEditing ? "Edit Sprint" : "New Sprint"}
@@ -84,6 +82,9 @@ const AddSprint = ({
         <Button type="submit" variant="contained" color="primary">
           {isEditing ? "Edit" : "Submit"}
         </Button>
+        {isEditing && (
+          <Button onClick={() => setIsEditing(false)}>Cancel</Button>
+        )}
       </form>
     </>
   );

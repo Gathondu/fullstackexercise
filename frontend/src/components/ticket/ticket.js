@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { GET_TICKET } from "../../graphql/ticket";
-import { useQuery } from "@apollo/client";
+import { GET_TICKET, DELETE_TICKET } from "../../graphql/ticket";
+import { useQuery, useMutation } from "@apollo/client";
 import { Typography, Button } from "@mui/material";
 import AddTicket from "./addTicket";
 import TicketSprint from "./sprint";
@@ -12,6 +12,10 @@ const Ticket = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [viewSprint, setViewSprint] = useState(false);
   const navigate = useNavigate();
+  const [deleteTicket] = useMutation(DELETE_TICKET, {
+    onCompleted: () => navigate("/tickets"),
+    refetchQueries: ["tickets"],
+  });
 
   if (loading)
     return (
@@ -45,6 +49,9 @@ const Ticket = () => {
         </Typography>
       </div>
       <Button onClick={() => setIsEditing(true)}>Edit</Button>
+      <Button onClick={() => deleteTicket({ variables: { id } })}>
+        Delete
+      </Button>
       {data.ticket.sprint && (
         <>
           <Button onClick={() => setViewSprint(!viewSprint)}>

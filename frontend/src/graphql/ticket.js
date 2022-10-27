@@ -58,3 +58,16 @@ export const CREATE_TICKET = gql`
     }
   }
 `;
+export const DELETE_TICKET = gql`
+  mutation DeleteTicket($id: String!) {
+    deleteTicket(id: $id) {
+      ticket {
+        id
+        name
+        description
+        points
+      }
+      errors
+    }
+  }
+`;

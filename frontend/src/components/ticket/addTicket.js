@@ -77,9 +77,7 @@ const AddTicket = ({
 
   return (
     <>
-      {isEditing && (
-        <Button onClick={() => navigate("/tickets")}>back to tickets</Button>
-      )}
+      <Button onClick={() => navigate("/tickets")}>back to tickets</Button>
       <form onSubmit={handleSubmit}>
         <Typography sx={{ m: 3 }}>
           {isEditing ? "Edit Ticket" : "New Ticket"}
@@ -131,6 +129,9 @@ const AddTicket = ({
         <Button type="submit" variant="contained" color="primary">
           {isEditing ? "Edit" : "Submit"}
         </Button>
+        {isEditing && (
+          <Button onClick={() => setIsEditing(false)}>Cancel</Button>
+        )}
       </form>
     </>
   );

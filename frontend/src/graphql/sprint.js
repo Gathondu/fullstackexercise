@@ -53,3 +53,17 @@ export const CREATE_SPRINT = gql`
     }
   }
 `;
+
+export const DELETE_SPRINT = gql`
+  mutation DeleteSprint($id: String!) {
+    deleteSprint(id: $id) {
+      sprint {
+        id
+        name
+        startDate
+        endDate
+      }
+      errors
+    }
+  }
+`;
