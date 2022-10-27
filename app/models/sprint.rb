@@ -6,5 +6,5 @@ class Sprint
   field :end_date, type: String
   field :points, type: Integer
 
-  has_many :tickets, dependent: :destroy
+  has_many :tickets
 end

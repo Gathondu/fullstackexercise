@@ -114,7 +114,6 @@ const AddTicket = ({
             <Select
               value={selected}
               onChange={(e) => setSelected(e.target.value)}
-              required
               inputProps={{
                 name: "sprint",
               }}

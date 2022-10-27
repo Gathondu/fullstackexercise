@@ -16,9 +16,9 @@ class Mutations::CreateTicket < Mutations::BaseMutation
     }
 
     ticket = ticket_id ? Ticket.find(ticket_id) : Ticket.create(params)
-    ticket.sprint = Sprint.find(sprint_id)
+    ticket.sprint = Sprint.find(sprint_id) if sprint_id
 
-    if ticket.update(params) || ticket.save
+    if ticket.update(params) || ticket.save(validate: false)
       { ticket: ticket, errors: [] }
     else
       { ticket: ticket, errors: ticket.errors.full_messages }
