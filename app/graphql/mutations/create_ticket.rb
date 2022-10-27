@@ -19,7 +19,7 @@ class Mutations::CreateTicket < Mutations::BaseMutation
 
     ticket = ticket_id ? Ticket.find(ticket_id) : Ticket.create(params)
 
-    if ticket.save || ticket.update(params)
+    if ticket.update(params) || ticket.save
       { ticket: ticket, errors: [] }
     else
       { ticket: nil, errors: ticket.errors.full_messages }

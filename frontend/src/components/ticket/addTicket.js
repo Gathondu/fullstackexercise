@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 import { CREATE_TICKET } from "../../graphql/ticket";
 import { GET_SPRINTS } from "../../graphql/sprint";
@@ -14,13 +14,16 @@ import {
   MenuItem,
 } from "@mui/material";
 
-const AddTicket = ({ ticket, isEditing }) => {
+const AddTicket = ({ ticket = {}, isEditing = false }) => {
   const [name, setName] = useState(ticket.name || "");
   const [description, setDescription] = useState(ticket.description || "");
   const [points, setPoints] = useState(ticket.points || 0);
   const { ticketId } = useParams();
+  const navigate = useNavigate();
 
-  const [createTicket, { loading, error }] = useMutation(CREATE_TICKET);
+  const [createTicket, { loading, error }] = useMutation(CREATE_TICKET, {
+    onCompleted: () => navigate("/tickets"),
+  });
 
   const {
     data,
@@ -67,7 +70,9 @@ const AddTicket = ({ ticket, isEditing }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Typography sx={{ m: 3 }}>New Ticket</Typography>
+      <Typography sx={{ m: 3 }}>
+        {isEditing ? "Edit Ticket" : "New Ticket"}
+      </Typography>
       <FormGroup sx={{ mb: 3, width: "50%" }}>
         <TextField
           id="standard-basic"

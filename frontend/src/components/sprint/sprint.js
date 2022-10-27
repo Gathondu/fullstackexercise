@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { GET_SPRINT } from "../../graphql/sprint";
 import { useQuery } from "@apollo/client";
 import { Typography, Button } from "@mui/material";
+import SprintTickets from "./tickets";
 
 const Sprint = () => {
   const { sprintId: id } = useParams();
   const { data, loading, error } = useQuery(GET_SPRINT, { variables: { id } });
+  const [viewTickets, setViewTickets] = useState(false);
 
   if (loading)
     return (
@@ -35,8 +37,11 @@ const Sprint = () => {
         Tickets: {tickets.length > 0 ? tickets.length : "None"}
       </Typography>
       {tickets.length > 0 && (
-        <Button href={`/sprint/${id}/tickets`}>View Tickets in Sprint</Button>
+        <Button onClick={() => setViewTickets(!viewTickets)}>
+          {!viewTickets ? "View Tickets" : "Hide Tickets"}
+        </Button>
       )}
+      {viewTickets && <SprintTickets tickets={tickets} />}
     </div>
   );
 };

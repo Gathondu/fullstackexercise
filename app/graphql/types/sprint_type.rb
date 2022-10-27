@@ -9,8 +9,8 @@ module Types
     field :points, Integer, null: false
     field :tickets, [Types::TicketType], null: true
 
-    def tickets_count
-      object.tickets.size
+    def tickets
+      object.tickets
     end
   end
 end
