@@ -19,7 +19,7 @@ const Sprint = () => {
   const navigate = useNavigate();
   const [deleteSprint] = useMutation(DELETE_SPRINT, {
     onCompleted: () => navigate("/sprints"),
-    refetchQueries: ["sprints"],
+    refetchQueries: ["sprints", { query: GET_UNASSIGNED_TICKETS }],
   });
 
   if (loading)
