@@ -74,7 +74,7 @@ const Sprint = () => {
         </Button>
       )}
       {tickets.length > 0 && viewTickets && <SprintTickets tickets={tickets} />}
-      {assignTickets && (
+      {unassignedTickets?.unassignedTickets.length > 0 && assignTickets && (
         <UnassigedTickets
           unassignedTickets={unassignedTickets?.unassignedTickets}
         />
