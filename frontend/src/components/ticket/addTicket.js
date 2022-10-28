@@ -30,7 +30,7 @@ const AddTicket = ({
       isEditing ? navigate(`/ticket/${ticketId}`) : navigate("/tickets");
       setIsEditing(false);
     },
-    refetchQueries: ["tickets"],
+    refetchQueries: ["tickets", "sprints", "unassingedTickets"],
   });
 
   const {

@@ -65,12 +65,12 @@ const Sprint = () => {
       </Button>
       {tickets.length > 0 && (
         <Button onClick={() => setViewTickets(!viewTickets)}>
-          {!viewTickets ? "View Tickets" : "Hide Tickets"}
+          {!viewTickets ? "View Tickets" : "Hide Sprint Tickets"}
         </Button>
       )}
       {unassignedTickets?.unassignedTickets.length > 0 && (
         <Button onClick={() => setAssignTickets(!assignTickets)}>
-          {!assignTickets ? "Assign Tickets" : "Hide Tickets"}
+          {!assignTickets ? "Assign Tickets" : "Hide Unassigned Tickets"}
         </Button>
       )}
       {tickets.length > 0 && viewTickets && <SprintTickets tickets={tickets} />}

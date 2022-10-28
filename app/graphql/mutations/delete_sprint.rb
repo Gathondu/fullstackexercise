@@ -6,7 +6,7 @@ class Mutations::DeleteSprint < Mutations::BaseMutation
 
   def resolve(id:)
     sprint = Sprint.find(id)
-    sprint.tickets.delete(sprint.tickets)
+    sprint.tickets.clear
 
     if sprint.delete
       { sprint: sprint, errors: [] }
