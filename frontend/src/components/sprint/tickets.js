@@ -12,6 +12,7 @@ import {
 import { useParams } from "react-router-dom";
 import { REMOVE_TICKET_FROM_SPRINT } from "../../graphql/sprint";
 import { useMutation } from "@apollo/client";
+import { DoneAllOutlined, DeleteOutline } from "@mui/icons-material";
 
 const SprintTickets = ({ tickets }) => {
   const [selectedTickets, setSelectedTickets] = useState([]);
@@ -73,14 +74,30 @@ const SprintTickets = ({ tickets }) => {
       <form onSubmit={handleSubmit}>
         <FormControl sx={{ m: 1 }}>
           <div>
-            <Button sx={{ width: "fit-content" }} type="submit">
+            <Button
+              sx={{ mr: 2 }}
+              type="submit"
+              startIcon={<DeleteOutline />}
+              color="error"
+              variant="contained"
+            >
               Remove From Sprint
             </Button>
-            <Button sx={{ width: "fit-content" }} onClick={toggleSelect}>
+            <Button
+              onClick={toggleSelect}
+              variant="outlined"
+              startIcon={<DoneAllOutlined />}
+            >
               select all
             </Button>
           </div>
-          <Grid container rowSpacing={1} columns={3} columnSpacing={2}>
+          <Grid
+            sx={{ mt: 2 }}
+            container
+            rowSpacing={1}
+            columns={3}
+            columnSpacing={2}
+          >
             {tickets.map((ticket) => (
               <Grid item key={ticket.id}>
                 <Card sx={{ maxWidth: 345 }}>

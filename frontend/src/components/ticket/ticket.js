@@ -2,9 +2,16 @@ import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { GET_TICKET, DELETE_TICKET } from "../../graphql/ticket";
 import { useQuery, useMutation } from "@apollo/client";
-import { Typography, Button } from "@mui/material";
+import { Typography, Button, CardContent } from "@mui/material";
 import AddTicket from "./addTicket";
 import TicketSprint from "./sprint";
+import {
+  ModeEditOutline,
+  DeleteOutline,
+  VisibilityOutlined,
+  VisibilityOffOutlined,
+  ArrowBackOutlined,
+} from "@mui/icons-material";
 
 const Ticket = () => {
   const { ticketId: id } = useParams();
@@ -36,25 +43,52 @@ const Ticket = () => {
     <AddTicket ticket={data.ticket} isEditing setIsEditing={setIsEditing} />
   ) : (
     <>
-      <Button onClick={() => navigate("/tickets")}>back to tickets</Button>
+      <Button
+        variant="outlined"
+        startIcon={<ArrowBackOutlined />}
+        onClick={() => navigate("/tickets")}
+      >
+        back to tickets
+      </Button>
       <div>
-        <Typography gutterBottom variant="h5" component="div">
-          Name: {name}
-        </Typography>
-        <Typography gutterBottom variant="h5" component="div">
-          Description: {description}
-        </Typography>
-        <Typography gutterBottom variant="h5" component="div">
-          Points: {points}
-        </Typography>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            Name: {name}
+          </Typography>
+          <Typography gutterBottom variant="h5" component="div">
+            Description: {description}
+          </Typography>
+          <Typography gutterBottom variant="h5" component="div">
+            Points: {points}
+          </Typography>
+        </CardContent>
       </div>
-      <Button onClick={() => setIsEditing(true)}>Edit</Button>
-      <Button onClick={() => deleteTicket({ variables: { id } })}>
+      <Button
+        sx={{ mr: 2 }}
+        variant="outlined"
+        startIcon={<ModeEditOutline />}
+        onClick={() => setIsEditing(true)}
+      >
+        Edit
+      </Button>
+      <Button
+        variant="contained"
+        onClick={() => deleteTicket({ variables: { id } })}
+        startIcon={<DeleteOutline />}
+        color="error"
+      >
         Delete
       </Button>
       {data.ticket.sprint && (
         <>
-          <Button onClick={() => setViewSprint(!viewSprint)}>
+          <Button
+            variant="outlined"
+            sx={{ ml: 2 }}
+            onClick={() => setViewSprint(!viewSprint)}
+            startIcon={
+              !viewSprint ? <VisibilityOutlined /> : <VisibilityOffOutlined />
+            }
+          >
             {viewSprint ? "Hide Sprint" : "View Sprint"}
           </Button>
           {viewSprint && <TicketSprint sprint={data.ticket.sprint} />}

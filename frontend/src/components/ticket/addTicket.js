@@ -13,6 +13,7 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
+import { ArrowBackOutlined } from "@mui/icons-material";
 
 const AddTicket = ({
   ticket = {},
@@ -77,27 +78,38 @@ const AddTicket = ({
 
   return (
     <>
-      <Button onClick={() => navigate("/tickets")}>back to tickets</Button>
-      <form onSubmit={handleSubmit}>
-        <Typography sx={{ m: 3 }}>
+      <Button
+        variant="outlined"
+        startIcon={<ArrowBackOutlined />}
+        onClick={() => navigate("/tickets")}
+      >
+        back to tickets
+      </Button>
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          paddingLeft: "12rem",
+        }}
+      >
+        <Typography sx={{ mt: 3, mb: 3 }} variant="h4">
           {isEditing ? "Edit Ticket" : "New Ticket"}
         </Typography>
-        <FormGroup sx={{ mb: 3, width: "50%" }}>
+        <FormGroup sx={{ mb: 2, width: "60%" }}>
           <TextField
-            id="standard-basic"
-            required
+            sx={{ mb: 2 }}
+            requiredi7
             label="Name"
-            variant="standard"
+            variant="outlined"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
           <TextField
-            id="standard-multiline-static"
+            sx={{ mb: 2 }}
             label="Description"
             multiline
             rows={4}
             defaultValue={description}
-            variant="standard"
+            variant="outlined"
             onChange={(e) => setDescription(e.target.value)}
           />
           <TextField

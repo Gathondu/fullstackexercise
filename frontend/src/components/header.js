@@ -1,15 +1,19 @@
 import React, { useState } from "react";
-
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import Menu from "@mui/material/Menu";
-import Link from "@mui/material/Link";
-import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
+import {
+  ListItemButton,
+  AppBar,
+  Box,
+  Toolbar,
+  Typography,
+  IconButton,
+  Menu,
+  MenuItem,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
+import { ArticleOutlined } from "@mui/icons-material";
+import MenuIcon from "@mui/icons-material/Menu";
 
 export default function Header({ title }) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -35,7 +39,7 @@ export default function Header({ title }) {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, mx: "10rem" }}>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -59,13 +63,16 @@ export default function Header({ title }) {
           >
             {menuItems.map((item) => (
               <MenuItem key={item.title}>
-                <Link
+                <ListItemButton
                   onClick={() => navigate(item.link)}
                   variant="h6"
                   underline="hover"
                 >
-                  {item.title}
-                </Link>
+                  <ListItemIcon>
+                    <ArticleOutlined />
+                  </ListItemIcon>
+                  <ListItemText primary={item.title} />
+                </ListItemButton>
               </MenuItem>
             ))}
           </Menu>

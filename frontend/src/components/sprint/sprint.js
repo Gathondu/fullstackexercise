@@ -3,11 +3,18 @@ import { useParams, useNavigate } from "react-router-dom";
 import { GET_SPRINT, DELETE_SPRINT } from "../../graphql/sprint";
 import { GET_UNASSIGNED_TICKETS } from "../../graphql/ticket";
 import { useQuery, useMutation } from "@apollo/client";
-import { Typography, Button } from "@mui/material";
+import { Typography, Button, CardContent } from "@mui/material";
 import SprintTickets from "./tickets";
 import AddSprint from "./addSprint";
 import dayjs from "dayjs";
 import UnassigedTickets from "./unassigedTickets";
+import {
+  ModeEditOutline,
+  DeleteOutline,
+  VisibilityOutlined,
+  VisibilityOffOutlined,
+  ArrowBackOutlined,
+} from "@mui/icons-material";
 
 const Sprint = () => {
   const { sprintId: id } = useParams();
@@ -43,33 +50,69 @@ const Sprint = () => {
         <AddSprint sprint={data.sprint} isEditing setIsEditing={setIsEditing} />
       ) : (
         <>
-          <Button onClick={() => navigate("/sprints")}>Back to Sprints</Button>
-          <Typography gutterBottom variant="h5" component="div">
-            Name: {name}
-          </Typography>
-          <Typography gutterBottom variant="h5" component="div">
-            Points: {points}
-          </Typography>
-          <Typography gutterBottom variant="h5" component="div">
-            Tickets: {tickets.length > 0 ? tickets.length : "None"}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {dayjs(startDate).format("dddd, MMMM D YYYY")} -{" "}
-            {dayjs(endDate).format("dddd, MMMM D YYYY")}
-          </Typography>
+          <Button
+            variant="outlined"
+            startIcon={<ArrowBackOutlined />}
+            onClick={() => navigate("/sprints")}
+          >
+            Back to Sprints
+          </Button>
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              Name: {name}
+            </Typography>
+            <Typography gutterBottom variant="h5" component="div">
+              Points: {points}
+            </Typography>
+            <Typography gutterBottom variant="h5" component="div">
+              Tickets: {tickets.length > 0 ? tickets.length : "None"}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {dayjs(startDate).format("dddd, MMMM D YYYY")} -{" "}
+              {dayjs(endDate).format("dddd, MMMM D YYYY")}
+            </Typography>
+          </CardContent>
         </>
       )}
-      {!isEditing && <Button onClick={() => setIsEditing(true)}>Edit</Button>}
-      <Button onClick={() => deleteSprint({ variables: { id } })}>
+      {!isEditing && (
+        <Button
+          sx={{ mr: 2 }}
+          variant="outlined"
+          startIcon={<ModeEditOutline />}
+          onClick={() => setIsEditing(true)}
+        >
+          Edit
+        </Button>
+      )}
+      <Button
+        variant="contained"
+        startIcon={<DeleteOutline />}
+        color="error"
+        onClick={() => deleteSprint({ variables: { id } })}
+      >
         Delete
       </Button>
       {tickets.length > 0 && (
-        <Button onClick={() => setViewTickets(!viewTickets)}>
+        <Button
+          startIcon={
+            !viewTickets ? <VisibilityOutlined /> : <VisibilityOffOutlined />
+          }
+          variant="outlined"
+          sx={{ ml: 2 }}
+          onClick={() => setViewTickets(!viewTickets)}
+        >
           {!viewTickets ? "View Tickets" : "Hide Sprint Tickets"}
         </Button>
       )}
       {unassignedTickets?.unassignedTickets.length > 0 && (
-        <Button onClick={() => setAssignTickets(!assignTickets)}>
+        <Button
+          variant="outlined"
+          sx={{ ml: 2 }}
+          startIcon={
+            !assignTickets ? <VisibilityOutlined /> : <VisibilityOffOutlined />
+          }
+          onClick={() => setAssignTickets(!assignTickets)}
+        >
           {!assignTickets ? "Assign Tickets" : "Hide Unassigned Tickets"}
         </Button>
       )}

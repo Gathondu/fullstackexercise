@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const TicketSprint = ({ sprint }) => {
   const navigate = useNavigate();
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345, mt: 3 }}>
       <CardActionArea onClick={() => navigate(`/sprint/${sprint.id}`)}>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">

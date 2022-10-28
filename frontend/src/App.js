@@ -4,10 +4,12 @@ import Header from "./components";
 
 const App = ({ children }) => {
   return (
-    <Container className="App">
+    <>
       <Header title="FullStack Exercise" />
-      {children}
-    </Container>
+      <Container sx={{ mt: "1rem" }} className="App">
+        {children}
+      </Container>
+    </>
   );
 };
 

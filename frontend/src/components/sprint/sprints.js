@@ -4,7 +4,8 @@ import { useQuery } from "@apollo/client";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { CardActionArea, Link, Grid } from "@mui/material";
+import { CardActionArea, Button, Grid } from "@mui/material";
+import { AddOutlined } from "@mui/icons-material";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 
@@ -27,14 +28,14 @@ const Sprints = () => {
 
   return (
     <div>
-      <Link
+      <Button
         sx={{ marginTop: "3px" }}
-        variant="button"
-        underline="hover"
+        variant="outlined"
+        startIcon={<AddOutlined />}
         onClick={() => navigate("/sprints/add")}
       >
         Add Sprint
-      </Link>
+      </Button>
 
       {data.sprints.length > 0 ? (
         <Grid

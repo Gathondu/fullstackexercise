@@ -4,8 +4,9 @@ import { useQuery } from "@apollo/client";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { CardActionArea, Link, Grid } from "@mui/material";
+import { CardActionArea, Button, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { AddOutlined } from "@mui/icons-material";
 
 const Tickets = () => {
   const { data, loading, error } = useQuery(GET_TICKETS);
@@ -26,14 +27,14 @@ const Tickets = () => {
 
   return (
     <div>
-      <Link
+      <Button
         sx={{ marginTop: "3px" }}
-        variant="button"
-        underline="hover"
+        variant="outlined"
+        startIcon={<AddOutlined />}
         onClick={() => navigate("/tickets/add")}
       >
         Add Ticket
-      </Link>
+      </Button>
 
       {data.tickets.length > 0 ? (
         <Grid
