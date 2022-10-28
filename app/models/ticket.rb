@@ -6,4 +6,6 @@ class Ticket
   field :points, type: Integer
 
   belongs_to :sprint
+
+  scope :unassigned, -> { where(sprint: nil) }
 end

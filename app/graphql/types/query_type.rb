@@ -9,6 +9,7 @@ module Types
 
     field :sprints, [Types::SprintType], null: false, description: 'Sprints'
     field :tickets, [Types::TicketType], null: false, description: 'Tickets'
+    field :unassigned_tickets, [Types::TicketType], null: false, description: 'Unassigned Tickets'
 
     def sprints
       Sprint.all
@@ -16,6 +17,10 @@ module Types
 
     def tickets
       Ticket.all
+    end
+
+    def unassigned_tickets
+      Ticket.unassigned
     end
 
     field :sprint, Types::SprintType, null: false do

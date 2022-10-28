@@ -34,7 +34,7 @@ export const GET_TICKET = gql`
 `;
 
 export const CREATE_TICKET = gql`
-  mutation CreateTicket(
+  mutation createTicket(
     $name: String!
     $description: String!
     $points: Int!
@@ -59,7 +59,7 @@ export const CREATE_TICKET = gql`
   }
 `;
 export const DELETE_TICKET = gql`
-  mutation DeleteTicket($id: String!) {
+  mutation deleteTicket($id: String!) {
     deleteTicket(id: $id) {
       ticket {
         id
@@ -68,6 +68,21 @@ export const DELETE_TICKET = gql`
         points
       }
       errors
+    }
+  }
+`;
+
+export const GET_UNASSIGNED_TICKETS = gql`
+  query unassingedTickets {
+    unassignedTickets {
+      id
+      name
+      description
+      points
+      sprint {
+        id
+        name
+      }
     }
   }
 `;

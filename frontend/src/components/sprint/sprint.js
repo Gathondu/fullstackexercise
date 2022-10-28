@@ -1,17 +1,21 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { GET_SPRINT, DELETE_SPRINT } from "../../graphql/sprint";
+import { GET_UNASSIGNED_TICKETS } from "../../graphql/ticket";
 import { useQuery, useMutation } from "@apollo/client";
 import { Typography, Button } from "@mui/material";
 import SprintTickets from "./tickets";
 import AddSprint from "./addSprint";
 import dayjs from "dayjs";
+import UnassigedTickets from "./unassigedTickets";
 
 const Sprint = () => {
   const { sprintId: id } = useParams();
   const { data, loading, error } = useQuery(GET_SPRINT, { variables: { id } });
+  const { data: unassignedTickets } = useQuery(GET_UNASSIGNED_TICKETS);
   const [viewTickets, setViewTickets] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [assignTickets, setAssignTickets] = useState(false);
   const navigate = useNavigate();
   const [deleteSprint] = useMutation(DELETE_SPRINT, {
     onCompleted: () => navigate("/sprints"),
@@ -64,7 +68,17 @@ const Sprint = () => {
           {!viewTickets ? "View Tickets" : "Hide Tickets"}
         </Button>
       )}
-      {viewTickets && <SprintTickets tickets={tickets} />}
+      {unassignedTickets?.unassignedTickets.length > 0 && (
+        <Button onClick={() => setAssignTickets(!assignTickets)}>
+          {!assignTickets ? "Assign Tickets" : "Hide Tickets"}
+        </Button>
+      )}
+      {tickets.length > 0 && viewTickets && <SprintTickets tickets={tickets} />}
+      {assignTickets && (
+        <UnassigedTickets
+          unassignedTickets={unassignedTickets?.unassignedTickets}
+        />
+      )}
     </div>
   );
 };
