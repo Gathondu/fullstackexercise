@@ -37,14 +37,27 @@ const UnassigedTickets = ({ unassignedTickets }) => {
     e.preventDefault();
     addToSprint({ variables: { id, tickets } });
   };
+  const toggleSelect = (e) => {
+    e.preventDefault();
+    if (tickets.length > 0) {
+      setTickets([]);
+    } else {
+      setTickets(unassignedTickets.map((ticket) => ticket.id));
+    }
+  };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <FormControl sx={{ m: 1 }}>
-          <Button sx={{ width: "fit-content" }} type="submit">
-            Add To Sprint
-          </Button>
+          <div>
+            <Button sx={{ width: "fit-content" }} type="submit">
+              Add To Sprint
+            </Button>
+            <Button sx={{ width: "fit-content" }} onClick={toggleSelect}>
+              select all
+            </Button>
+          </div>
           <Grid container rowSpacing={1} columns={3} columnSpacing={2}>
             {unassignedTickets.map((unassignedTicket) => (
               <Grid item key={unassignedTicket.id}>

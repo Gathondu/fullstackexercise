@@ -58,13 +58,28 @@ const SprintTickets = ({ tickets }) => {
     e.preventDefault();
     removeFromSprint({ variables: { id, tickets: selectedTickets } });
   };
+
+  const toggleSelect = (e) => {
+    e.preventDefault();
+    if (selectedTickets.length > 0) {
+      setSelectedTickets([]);
+    } else {
+      setSelectedTickets(tickets.map((ticket) => ticket.id));
+    }
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <FormControl sx={{ m: 1 }}>
-          <Button sx={{ width: "fit-content" }} type="submit">
-            Remove From Sprint
-          </Button>
+          <div>
+            <Button sx={{ width: "fit-content" }} type="submit">
+              Remove From Sprint
+            </Button>
+            <Button sx={{ width: "fit-content" }} onClick={toggleSelect}>
+              select all
+            </Button>
+          </div>
           <Grid container rowSpacing={1} columns={3} columnSpacing={2}>
             {tickets.map((ticket) => (
               <Grid item key={ticket.id}>
