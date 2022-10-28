@@ -9,6 +9,7 @@ import {
   CardContent,
   Button,
 } from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
 import { useMutation } from "@apollo/client";
 import { GET_UNASSIGNED_TICKETS } from "../../graphql/ticket";
 import { ADD_TICKET_TO_SPRINT, GET_SPRINT } from "../../graphql/sprint";
@@ -19,10 +20,11 @@ const UnassigedTickets = ({ unassignedTickets }) => {
   const [tickets, setTickets] = useState([]);
   const { sprintId: id } = useParams();
 
-  const [addToSprint] = useMutation(ADD_TICKET_TO_SPRINT, {
+  const [addToSprint, { loading }] = useMutation(ADD_TICKET_TO_SPRINT, {
     refetchQueries: [
       { query: GET_UNASSIGNED_TICKETS },
       { query: GET_SPRINT, variables: { id } },
+      "tickets",
     ],
   });
 
@@ -52,18 +54,21 @@ const UnassigedTickets = ({ unassignedTickets }) => {
       <form onSubmit={handleSubmit}>
         <FormControl sx={{ m: 1 }}>
           <div>
-            <Button
+            <LoadingButton
               sx={{ mr: 2 }}
               type="submit"
               startIcon={<AddBoxOutlined />}
               variant="outlined"
+              size="small"
+              loading={loading}
             >
               Add To Sprint
-            </Button>
+            </LoadingButton>
             <Button
               onClick={toggleSelect}
               startIcon={<DoneAllOutlined />}
               variant="outlined"
+              size="small"
             >
               select all
             </Button>

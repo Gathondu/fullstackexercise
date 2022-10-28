@@ -88,6 +88,7 @@ const Ticket = () => {
             startIcon={
               !viewSprint ? <VisibilityOutlined /> : <VisibilityOffOutlined />
             }
+            size="small"
           >
             {viewSprint ? "Hide Sprint" : "View Sprint"}
           </Button>

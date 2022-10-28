@@ -9,6 +9,7 @@ import {
   Button,
   Checkbox,
 } from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
 import { useParams } from "react-router-dom";
 import { REMOVE_TICKET_FROM_SPRINT } from "../../graphql/sprint";
 import { useMutation } from "@apollo/client";
@@ -74,19 +75,22 @@ const SprintTickets = ({ tickets }) => {
       <form onSubmit={handleSubmit}>
         <FormControl sx={{ m: 1 }}>
           <div>
-            <Button
+            <LoadingButton
               sx={{ mr: 2 }}
               type="submit"
               startIcon={<DeleteOutline />}
               color="error"
               variant="contained"
+              loading={loading}
+              size="small"
             >
               Remove From Sprint
-            </Button>
+            </LoadingButton>
             <Button
               onClick={toggleSelect}
               variant="outlined"
               startIcon={<DoneAllOutlined />}
+              size="small"
             >
               select all
             </Button>
