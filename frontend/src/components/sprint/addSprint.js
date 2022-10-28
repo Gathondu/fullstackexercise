@@ -114,7 +114,7 @@ const AddSprint = ({
           />
         </Stack>
         <Button type="submit" variant="contained" color="primary">
-          {isEditing ? "Edit" : "Submit"}
+          {isEditing ? "Save" : "Submit"}
         </Button>
         {isEditing && (
           <Button onClick={() => setIsEditing(false)}>Cancel</Button>

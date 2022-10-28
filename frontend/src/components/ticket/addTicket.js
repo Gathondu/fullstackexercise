@@ -110,7 +110,7 @@ const AddTicket = ({
         <FormGroup sx={{ mb: 2, width: "60%" }}>
           <TextField
             sx={{ mb: 2 }}
-            requiredi7
+            required
             label="Name"
             variant="outlined"
             value={name}
@@ -152,7 +152,7 @@ const AddTicket = ({
           </FormControl>
         </FormGroup>
         <Button type="submit" variant="contained" color="primary">
-          {isEditing ? "Edit" : "Submit"}
+          {isEditing ? "Save" : "Submit"}
         </Button>
         {isEditing && (
           <Button onClick={() => setIsEditing(false)}>Cancel</Button>
