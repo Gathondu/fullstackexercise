@@ -2,7 +2,15 @@ import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { GET_TICKET, DELETE_TICKET } from "../../graphql/ticket";
 import { useQuery, useMutation } from "@apollo/client";
-import { Typography, Button, CardContent } from "@mui/material";
+import {
+  Typography,
+  Button,
+  CardContent,
+  CircularProgress,
+  Alert,
+  AlertTitle,
+  Stack,
+} from "@mui/material";
 import AddTicket from "./addTicket";
 import TicketSprint from "./sprint";
 import {
@@ -26,15 +34,24 @@ const Ticket = () => {
 
   if (loading)
     return (
-      <Typography gutterBottom variant="h5" component="div">
-        "Loading..."
-      </Typography>
+      <Stack
+        sx={{ color: "grey.500", paddingLeft: "5rem" }}
+        spacing={2}
+        direction="row"
+      >
+        <CircularProgress color="secondary" />
+        <CircularProgress color="success" />
+        <CircularProgress color="inherit" />
+      </Stack>
     );
   if (error)
     return (
-      <Typography variant="body2" color="text.secondary">
-        `Fetch error! ${error.message}`
-      </Typography>
+      <Stack sx={{ width: "100%" }} spacing={2}>
+        <Alert severity="error">
+          <AlertTitle>Error</AlertTitle>
+          {error}
+        </Alert>
+      </Stack>
     );
 
   const { name, points, description } = data.ticket;

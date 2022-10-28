@@ -12,6 +12,10 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  CircularProgress,
+  Alert,
+  AlertTitle,
+  Stack,
 } from "@mui/material";
 import { ArrowBackOutlined } from "@mui/icons-material";
 
@@ -65,15 +69,24 @@ const AddTicket = ({
 
   if (loading)
     return (
-      <Typography gutterBottom variant="h5" component="div">
-        "Loading..."
-      </Typography>
+      <Stack
+        sx={{ color: "grey.500", paddingLeft: "5rem" }}
+        spacing={2}
+        direction="row"
+      >
+        <CircularProgress color="secondary" />
+        <CircularProgress color="success" />
+        <CircularProgress color="inherit" />
+      </Stack>
     );
   if (error)
     return (
-      <Typography variant="body2" color="text.secondary">
-        `Ticket Error! ${error.message}`
-      </Typography>
+      <Stack sx={{ width: "100%" }} spacing={2}>
+        <Alert severity="error">
+          <AlertTitle>Error</AlertTitle>
+          {error}
+        </Alert>
+      </Stack>
     );
 
   return (

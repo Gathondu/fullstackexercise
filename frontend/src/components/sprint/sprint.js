@@ -3,7 +3,15 @@ import { useParams, useNavigate } from "react-router-dom";
 import { GET_SPRINT, DELETE_SPRINT } from "../../graphql/sprint";
 import { GET_UNASSIGNED_TICKETS } from "../../graphql/ticket";
 import { useQuery, useMutation } from "@apollo/client";
-import { Typography, Button, CardContent } from "@mui/material";
+import {
+  Typography,
+  Button,
+  CardContent,
+  CircularProgress,
+  Alert,
+  AlertTitle,
+  Stack,
+} from "@mui/material";
 import SprintTickets from "./tickets";
 import AddSprint from "./addSprint";
 import dayjs from "dayjs";
@@ -31,15 +39,24 @@ const Sprint = () => {
 
   if (loading)
     return (
-      <Typography gutterBottom variant="h5" component="div">
-        "Loading Sprint..."
-      </Typography>
+      <Stack
+        sx={{ color: "grey.500", paddingLeft: "5rem" }}
+        spacing={2}
+        direction="row"
+      >
+        <CircularProgress color="secondary" />
+        <CircularProgress color="success" />
+        <CircularProgress color="inherit" />
+      </Stack>
     );
   if (error)
     return (
-      <Typography variant="body2" color="text.secondary">
-        `Fetch error! ${error.message}`
-      </Typography>
+      <Stack sx={{ width: "100%" }} spacing={2}>
+        <Alert severity="error">
+          <AlertTitle>Error</AlertTitle>
+          {error}
+        </Alert>
+      </Stack>
     );
 
   const { name, points, tickets, startDate, endDate } = data.sprint;

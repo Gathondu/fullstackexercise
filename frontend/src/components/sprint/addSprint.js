@@ -2,7 +2,15 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useNavigate, useParams } from "react-router-dom";
 import { CREATE_SPRINT } from "../../graphql/sprint";
-import { TextField, Typography, Stack, Button } from "@mui/material";
+import {
+  TextField,
+  Typography,
+  Stack,
+  Button,
+  CircularProgress,
+  Alert,
+  AlertTitle,
+} from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import { ArrowBackOutlined } from "@mui/icons-material";
@@ -38,15 +46,24 @@ const AddSprint = ({
   };
   if (loading)
     return (
-      <Typography gutterBottom variant="h5" component="div">
-        "Loading..."
-      </Typography>
+      <Stack
+        sx={{ color: "grey.500", paddingLeft: "5rem" }}
+        spacing={2}
+        direction="row"
+      >
+        <CircularProgress color="secondary" />
+        <CircularProgress color="success" />
+        <CircularProgress color="inherit" />
+      </Stack>
     );
   if (error)
     return (
-      <Typography variant="body2" color="text.secondary">
-        `Sprint Error! ${error.message}`
-      </Typography>
+      <Stack sx={{ width: "100%" }} spacing={2}>
+        <Alert severity="error">
+          <AlertTitle>Error</AlertTitle>
+          {error}
+        </Alert>
+      </Stack>
     );
 
   return (

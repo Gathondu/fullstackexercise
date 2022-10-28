@@ -4,7 +4,15 @@ import { useQuery } from "@apollo/client";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { CardActionArea, Button, Grid } from "@mui/material";
+import {
+  CardActionArea,
+  CircularProgress,
+  Button,
+  Grid,
+  Stack,
+  Alert,
+  AlertTitle,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { AddOutlined } from "@mui/icons-material";
 
@@ -14,17 +22,25 @@ const Tickets = () => {
 
   if (loading)
     return (
-      <Typography gutterBottom variant="h5" component="div">
-        "Loading Tickets..."
-      </Typography>
+      <Stack
+        sx={{ color: "grey.500", paddingLeft: "5rem" }}
+        spacing={2}
+        direction="row"
+      >
+        <CircularProgress color="secondary" />
+        <CircularProgress color="success" />
+        <CircularProgress color="inherit" />
+      </Stack>
     );
   if (error)
     return (
-      <Typography variant="body2" color="text.secondary">
-        `Fetch error! ${error.message}`
-      </Typography>
+      <Stack sx={{ width: "100%" }} spacing={2}>
+        <Alert severity="error">
+          <AlertTitle>Error</AlertTitle>
+          {error}
+        </Alert>
+      </Stack>
     );
-
   return (
     <div>
       <Button
