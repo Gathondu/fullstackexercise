@@ -66,6 +66,8 @@ const AddSprint = ({
         <Stack spacing={2} sx={{ my: 3, width: "50%" }}>
           <DatePicker
             required
+            disablePast
+            minDate="1"
             label="Start Date"
             value={startDate}
             onChange={(newValue) => setStartDate(dayjs(newValue))}
@@ -73,6 +75,8 @@ const AddSprint = ({
           />
           <DatePicker
             required
+            disablePast
+            minDate="1"
             label="End Date"
             value={endDate}
             onChange={(newValue) => setEndDate(dayjs(newValue))}
